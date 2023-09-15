@@ -2,7 +2,7 @@ import os
 # Importando o Pacote do PySimpleGUI
 import PySimpleGUI as sg
 from view import create_main_window
-from popups import create_font_popup, popup_combo
+from popups import popup_combo
 from codificar_decodificar import codificar_codigo, decodificar_codigo
 
 
