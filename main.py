@@ -92,12 +92,19 @@ if __name__ == "__main__":
             sg.popup("Versão: 1.0.0")
         
         elif "::size" in event:
-            font_size = create_font_popup("Tamanho da Fonte", "Insira o tamanho da fonte")
+            font_size = sg.popup_get_text("Tamanho da Fonte", "Insira o tamanho da fonte")
+            if font_size == None:
+                font_size = 10
+            if font_size == "":
+                font_size = 10
             refresh_window()
         
         elif "::family" in event:
-            font_family = create_font_popup("Familia da Fonte", "Insira a Familia da fonte")
-            # x = sg.popup_get_text() outra forma dr criatr uma popup
+            font_family = sg.popup_get_text("Familia da Fonte", "Insira a Familia da fonte")
+            if font_family == None:
+                font_family = "Arial"
+            if font_family == "":
+                font_family = "Arial"
             refresh_window()
         
         elif "::code" in event:
