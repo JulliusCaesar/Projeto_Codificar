@@ -1,8 +1,10 @@
 import os
 # Importando o Pacote do PySimpleGUI
 import PySimpleGUI as sg
-
 from view import create_main_window
+from popups import create_font_popup, popup_combo
+from codificar_decodificar import codificar_codigo, decodificar_codigo
+
 
 current_theme = "DarkTeal6"
 font_family = "Arial"
@@ -24,8 +26,8 @@ def refresh_window():
     global window
     
     content = values["-CONTENT-"]
-    size = window.size
-    location = window.current_location()
+    size = window.size # lembrar de mduar aqui
+    location = window.current_location() # Lembrar de mudar aqui
     window.close()
     
     window = create_main_window(title=f"Codificador de texto para a Carol - {file_name}", theme=current_theme, size=size,
@@ -56,33 +58,38 @@ if __name__ == "__main__":
         
         # if event.endswith("::open") pode ser usado quando houver palavras parecidas
         elif "::save" in event:
-            file_path = sg.popup_get_file("Como deseja salvar o arquivo", save_as=True)
-            
-            with open(file_path, 'w', encoding="utf-8") as file:
-                file.write(values["-CONTENT-"])
-            
-            file_name = os.path.basename(file_path)
-            full_file_name = file_path
-            refresh_window()   
+            try:
+                file_path = sg.popup_get_file("Como deseja salvar o arquivo", save_as=True)
+                with open(file_path, 'w', encoding="utf-8") as file:
+                    file.write(values["-CONTENT-"])
+                file_name = os.path.basename(file_path)
+                full_file_name = file_path
+                refresh_window()
+            except TypeError:
+                refresh_window()
+            except FileNotFoundError:
+                refresh_window()  
             
         elif "::open" in event:
-            file_path = sg.popup_get_file("Selecione um arquivo para abrir")
-            
-            with open(file_path, 'r', encoding="utf-8") as file:
-                content = file.read()
-            
-            file_name = os.path.basename(file_path)
-            full_file_name = file_path
-            refresh_window()
-            
-            window['-CONTENT-'].update(content)
-            update_status_bar(content)
+            try:
+                file_path = sg.popup_get_file("Selecione um arquivo para abrir")
+                with open(file_path, 'r', encoding="utf-8") as file:
+                    content = file.read()
+                file_name = os.path.basename(file_path)
+                full_file_name = file_path
+                refresh_window()
+                window['-CONTENT-'].update(content)
+                update_status_bar(content)
+            except TypeError:
+                refresh_window()
+            except FileNotFoundError:
+                refresh_window() 
         
         elif "::credits" in event:
-            sg.popup_no_buttons("créditos: ByLearn \nAluno: Julio César")
+            sg.popup_no_buttons("créditos: Julio César\nAno: 2023")
         
         elif "::version" in event:
-            sg.popup("Versão: 2.0.0")
+            sg.popup("Versão: 1.0.0")
         
         elif "::size" in event:
             font_size = create_font_popup("Tamanho da Fonte", "Insira o tamanho da fonte")
@@ -92,6 +99,16 @@ if __name__ == "__main__":
             font_family = create_font_popup("Familia da Fonte", "Insira a Familia da fonte")
             # x = sg.popup_get_text() outra forma dr criatr uma popup
             refresh_window()
+        
+        elif "::code" in event:
+            texto = values["-CONTENT-"]
+            texto = codificar_codigo(texto)
+            window["-CONTENT-"].update(texto)
+        
+        elif "::decode" in event:
+            texto = values["-CONTENT-"]
+            texto = decodificar_codigo(texto)
+            window["-CONTENT-"].update(texto)
         
         elif "::theme" in event:
             current_theme = popup_combo(sg.theme_list(), current_theme, "Tema Padrão", "Selecione um Tema")
