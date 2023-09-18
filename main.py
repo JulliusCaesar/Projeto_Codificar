@@ -26,8 +26,8 @@ def refresh_window():
     global window
     
     content = values["-CONTENT-"]
-    size = window.size # lembrar de mduar aqui
-    location = window.current_location() # Lembrar de mudar aqui
+    size = window.size
+    location = window.current_location()
     window.close()
     
     window = create_main_window(title=f"Codificador de texto para a Carol - {file_name}", theme=current_theme, size=size,
