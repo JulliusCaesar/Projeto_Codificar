@@ -33,7 +33,9 @@ def menu_bar():
         [
             "&Sobre",
             [
-                "&Créditos::credits", "&Versão::version"
+                "&Créditos::credits", 
+                "&Versão::version",
+                "&Anjo::carol"
             ],
         ],      
     ]

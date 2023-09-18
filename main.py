@@ -4,6 +4,7 @@ import PySimpleGUI as sg
 from view import create_main_window
 from popups import popup_combo
 from codificar_decodificar import codificar_codigo, decodificar_codigo
+from photo import create_photo_window
 
 
 current_theme = "DarkTeal6"
@@ -120,6 +121,10 @@ if __name__ == "__main__":
         elif "::theme" in event:
             current_theme = popup_combo(sg.theme_list(), current_theme, "Tema Padrão", "Selecione um Tema")
             refresh_window()
+        
+        elif "::carol" in event:
+           create_photo_window()
+            
         
         elif event == '-CONTENT-':
            update_status_bar(values["-CONTENT-"]) 
