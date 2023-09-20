@@ -4,7 +4,7 @@ import pathlib
 import PySimpleGUI as sg
 from PIL import Image
 
-def resize_image(imagepath, size=(400,500)):
+def resize_image(imagepath, size=(450,750)):
     image = Image.open(imagepath)
     image = image.resize(size)
     
@@ -27,7 +27,7 @@ def create_photo_window(title=None, theme="DarkTeal9"):
 
     layout = [
         [
-            sg.Image(data=image, size=(400, 500)),
+            sg.Image(data=image, size=(450, 750)),
         ],
     ]
     
