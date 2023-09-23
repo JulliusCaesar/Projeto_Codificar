@@ -17,13 +17,8 @@ def resize_image(imagepath, size=(450,750)):
 def create_photo_window(title=None, theme="DarkTeal9"):    
     # Definindo o nosso tema
     sg.theme(theme)
-    
-    parent_path = str(pathlib.Path(__file__).parent.resolve())
     image = "foto_carol.png"
-    
-    fullpath = os.path.join(parent_path, image)
-    
-    image = resize_image(fullpath)
+    image = resize_image("foto_carol.png")
 
     layout = [
         [
