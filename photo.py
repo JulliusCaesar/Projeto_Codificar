@@ -1,6 +1,4 @@
 import io
-import os
-import pathlib
 import PySimpleGUI as sg
 from PIL import Image
 
