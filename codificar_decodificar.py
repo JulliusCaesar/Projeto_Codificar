@@ -14,6 +14,7 @@ traducao_codigo =  {'A': '11', "Á": "11", "À": "11", "Ã": "11", "Â": "11",
                     }
 
 simbols = [",",'!', '?', '.', '%', '(', ')', '-', '+', " ", "\n", "\'", "\"", "@", "#", "$", "\\", "/", "*", ";", ":"]
+number = ['0', "1", '2', '3', '4', '5', '6', '7', '8', '9']
 
 def decodificar_codigo(texto):
     codigo2 = texto.split()
@@ -51,6 +52,9 @@ def codificar_codigo(texto):
             if codigo[controle] == chave:
                 traducao += item
             elif codigo[controle]  in simbols:
+                traducao += codigo[controle]
+                break
+            if codigo[controle] in number:  # Aqui swrve para quando digitar datas, mas ainda precisa arrumar isso quando traduzir
                 traducao += codigo[controle]
                 break
 
