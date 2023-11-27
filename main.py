@@ -6,8 +6,10 @@ from popups import popup_combo
 from codificar_decodificar import codificar_codigo, decodificar_codigo
 from photo import create_photo_window
 
+with open("theme.txt") as file:
+    theme = file.read()
 
-current_theme = "DarkTeal6"
+current_theme = theme
 font_family = "Arial"
 font_size = 10
 file_name = "Novo Arquivo"
@@ -90,7 +92,7 @@ if __name__ == "__main__":
             sg.popup_no_buttons("créditos: Julio César\nAno: 2023")
         
         elif "::version" in event:
-            sg.popup("Versão: 1.0.0")
+            sg.popup("Versão: 1.0.1")
         
         elif "::size" in event:
             font_size = sg.popup_get_text("Tamanho da Fonte", "Insira o tamanho da fonte")
@@ -121,6 +123,8 @@ if __name__ == "__main__":
         elif "::theme" in event:
             current_theme = popup_combo(sg.theme_list(), current_theme, "Tema Padrão", "Selecione um Tema")
             refresh_window()
+            with open("theme.txt", 'w') as file:
+                file.write(current_theme)
         
         elif "::carol" in event:
            create_photo_window()

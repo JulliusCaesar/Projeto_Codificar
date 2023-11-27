@@ -1,6 +1,7 @@
 # Importando o Pacote do PySimpleGUI
 import PySimpleGUI as sg
 
+
 # Criando o menubar
 def menu_bar():
     menu = [
@@ -62,9 +63,10 @@ def right_click_menu():
     return menu
 
 
-
+with open("theme.txt") as file:
+    current_theme = file.readline()
 # Cria a janela principal
-def create_main_window(title=None, theme="DarkTeal6", size=(1100, 500), font=("Arial", 10), location=(None, None)):    
+def create_main_window(title=None, theme=current_theme, size=(1100, 500), font=("Arial", 10), location=(None, None)):    
     # Definindo o nosso tema
     sg.theme(theme)
 
