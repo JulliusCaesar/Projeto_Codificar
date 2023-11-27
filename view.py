@@ -62,9 +62,15 @@ def right_click_menu():
     
     return menu
 
-
-with open("theme.txt") as file:
-    current_theme = file.readline()
+try:
+    with open("theme.txt") as file:
+        current_theme = file.readline()
+except FileNotFoundError:
+    with open("theme.txt", 'w') as file:
+        file.write("DarkTeal6")
+    with open("theme.txt") as file:
+        current_theme = file.readline()
+    
 # Cria a janela principal
 def create_main_window(title=None, theme=current_theme, size=(1100, 500), font=("Arial", 10), location=(None, None)):    
     # Definindo o nosso tema

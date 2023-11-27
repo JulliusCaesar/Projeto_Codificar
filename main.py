@@ -6,8 +6,12 @@ from popups import popup_combo
 from codificar_decodificar import codificar_codigo, decodificar_codigo
 from photo import create_photo_window
 
-with open("theme.txt") as file:
-    theme = file.read()
+try:
+    with open("theme.txt") as file:
+        theme = file.read()
+except FileNotFoundError:
+    with open("theme.txt", 'w') as file:
+        file.write("DarkTeal6")
 
 current_theme = theme
 font_family = "Arial"

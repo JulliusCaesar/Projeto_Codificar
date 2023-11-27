@@ -11,8 +11,14 @@ def resize_image(imagepath, size=(450,750)):
     image_bytes = image_bytes.getvalue()
     
     return image_bytes
+try:
+    with open("theme.txt") as file:
+        theme = file.read()
+except FileNotFoundError:
+    with open("theme.txt", 'w') as file:
+        file.write("DarkTeal6")
 
-def create_photo_window(title=None, theme="DarkTeal9"):    
+def create_photo_window(title=None, theme=theme):    
     # Definindo o nosso tema
     sg.theme(theme)
     image = "foto_carol.png"
